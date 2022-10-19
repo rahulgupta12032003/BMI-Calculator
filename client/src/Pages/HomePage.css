@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto+Mono&family=Titan+One&display=swap');
+
+
+.bmi_container{
+    padding: 30px;
+    width: 35%;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 30px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.bmi_head {
+    font-size: 40px;
+    margin-top: 30px;
+    font-weight: bold;
+    background: -webkit-linear-gradient( yellow, crimson);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.calculated_bmi{
+    height: 200px;
+    width: 200px;
+    color: white;
+    margin: auto;
+    margin-top: 30px;
+    font-size: 18px;
+    display : flex;
+    text-align: center;
+    justify-content: center;
+    padding-top: 6%;
+    border-radius: 100px;
+    font-weight: bold;
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+}
+
+.profilePic {
+  border-radius: 100px;
+  margin-left: 20px ;
+}
+
+.profile{
+    font-size: 20px ;
+    line-height: 50px;
+    font-weight: bold
+}
