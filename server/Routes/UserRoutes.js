@@ -68,10 +68,19 @@ router.post("/login", async (req, res) => {
 })
 
 
-router.get("/:userId/getuser/detail", async (req, res) => {
-  const userId = req.params.userId
-  const userInfo = await UserModel.findOne({userId});
-  res.send(userInfo);
+// router.get("/:userId/getuser/detail", async (req, res) => {
+//   const userId = req.params.userId
+//   const userInfo = await UserModel.findById({userId});
+//   res.send(userInfo);
+// });
+
+router.get("/:userId/get/user", async (req, res) => {
+  try {
+    const signUpUser = await UserModel.findById(req.params.userId);
+    res.status(200).json(signUpUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 
