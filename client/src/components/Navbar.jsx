@@ -7,15 +7,34 @@ import {
   useColorModeValue,
   Stack,
   useColorMode,
+  MenuButton,
+  Menu,
+  MenuList,
+  MenuItem,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 
   const Navbar = () => {
 
   const { colorMode, toggleColorMode } = useColorMode();
+  const [user , setUser] = useState({})
+  const userId = JSON.parse(localStorage.getItem('userId'));
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get(`/api/auth/:${userId}/getuser/detail`)
+    .then((data) => {
+        console.log("user", data.data)
+        setUser(data.data)
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+  },[])
 
   return (
     <>
@@ -40,6 +59,25 @@ import { useNavigate } from 'react-router-dom';
 
               <Button bg='teal' colorScheme="white" onClick={() => navigate("/login")} >LOGIN</Button>
               <Button bg="teal" colorScheme="white" onClick={() => navigate("/register")} >REGISTER</Button>
+              <Menu>
+              <MenuButton
+                as={Button}
+                rounded={'full'}
+                variant={'link'}
+                cursor={'pointer'}
+                minW={0}>
+                <Avatar
+                  size={'sm'}
+                  src={
+                    'https://cdn4.iconfinder.com/data/icons/business-conceptual-part1-1/513/business-man-512.png'
+                  }
+                />
+              </MenuButton>
+              <MenuList>
+                <MenuItem>Name : {user.name}</MenuItem>
+                <MenuItem>Email: {user.email}</MenuItem>
+              </MenuList>
+            </Menu>
             </Stack>
           </Flex>
         </Flex>
