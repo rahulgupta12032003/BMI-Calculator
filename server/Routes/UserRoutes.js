@@ -50,7 +50,7 @@ router.post("/login", async (req, res) => {
             if ((user.email === email) && isMatch) {
               // Generate JWT Token
               const token = jwt.sign({ userID: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
-              res.send({ "status": "success", "message": "Login Success", "token": token })
+              res.send({ "status": "success", "message": "Login Success", "token": token , "userId": user._id })
             } else {
               res.send({ "status": "failed", "message": "Email or Password is not Valid" })
             }
@@ -66,5 +66,13 @@ router.post("/login", async (req, res) => {
         res.send({ "status": "failed", "message": "Unable to Login" })
      }
 })
+
+
+router.get("/:userId/getuser/detail", async (req, res) => {
+  const userId = req.params.userId
+  const userInfo = await UserModel.findOne({userId});
+  res.send(userInfo);
+});
+
 
 module.exports = router;

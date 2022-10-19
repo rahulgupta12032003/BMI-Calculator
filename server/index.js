@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const db = require('./db');
 const UserRoutes = require('./Routes/UserRoutes')
+const BmiRoutes = require('./Routes/BmiRoutes')
 const Users = require("./models/UserSchema")
 
 const app = express();
@@ -25,6 +26,8 @@ app.use(express.json());
 // })
 
 app.use("/api/auth" , UserRoutes)
+
+app.use("/calculate" , BmiRoutes)
 
 
 app.listen(port, () => {
