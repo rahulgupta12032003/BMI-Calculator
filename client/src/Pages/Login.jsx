@@ -27,10 +27,15 @@ import { useNavigate } from 'react-router-dom';
 
        axios.post("/api/auth/login", existingUser)
        .then((data) => {
-         alert("Congrats! Login Successful");
-         console.log(data.data.userId);
-         localStorage.setItem("userId", JSON.stringify(data.data.userId));
-         navigate("/")
+         if(data.data.userId === undefined){
+           alert("wrong credentials!")
+         }
+         else{
+          alert("Congrats! Login Successful");
+           console.log(data.data.userId);
+          localStorage.setItem("userId", JSON.stringify(data.data.userId));
+          navigate("/")
+         }
        })
        .catch((error) => {
          console.log(error);

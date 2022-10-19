@@ -1,7 +1,8 @@
 import { Button, FormControl, FormLabel, Input, Stack } from "@chakra-ui/react";
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -10,9 +11,16 @@ const HomePage = () => {
   const [height , setHeight] = useState(null);
   const [getBmi, setGetBmi] = useState(false);
   const [bmi , setbmi] = useState(null);
-
+  const navigate = useNavigate();
 
   const userId = JSON.parse(localStorage.getItem("userId"))
+
+  useEffect(() => {
+    if(!userId){
+      navigate("/register")
+    }
+  },[userId])
+
 
   const handleBmi = () => {
     const bmi_details = {

@@ -47,7 +47,7 @@ const Register = () => {
       else{
         axios.post("/api/auth/register" , users)
         .then(() => {
-            console.log("Registered Successfully")
+            alert("Registered Successfully")
             navigate("/login");
         })
         .catch((error) => {

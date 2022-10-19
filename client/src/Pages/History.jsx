@@ -3,12 +3,21 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import "./History.css"
+import { useNavigate } from 'react-router-dom';
 
 const History = () => {
 
-    const [userBmi , setUserBmi] = useState([])
-    const [userData , setUserData] = useState({})
+    const [userBmi , setUserBmi] = useState([]);
+    const [userData , setUserData] = useState({});
+    const navigate = useNavigate();
     const userId = JSON.parse(localStorage.getItem('userId'));
+
+
+    useEffect(() => {
+        if(!userId){
+          navigate("/register")
+        }
+      },[userId])
 
     useEffect(() => {
       axios.get(`/calculate/:${userId}/getbmi`)
