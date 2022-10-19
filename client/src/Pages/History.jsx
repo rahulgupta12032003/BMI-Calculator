@@ -22,15 +22,16 @@ const History = () => {
     },[])
 
     useEffect(() => {
-        axios.get(`/api/auth/:${userId}/getuser/detail`)
-        .then((data) => {
-            console.log("user", data.data)
-            setUserData(data.data)
-        })
-        .catch((err) => {
+        axios
+          .get(`/api/auth/${userId}/get/user`)
+          .then((data) => {
+            console.log("user", data.data);
+            setUserData(data.data);
+          })
+          .catch((err) => {
             console.log(err);
-        })
-    },[])
+          });
+    }, [userId]);
 
   return (
     <div>

@@ -22,19 +22,20 @@ import { useEffect, useState } from 'react';
 
   const { colorMode, toggleColorMode } = useColorMode();
   const [user , setUser] = useState({})
-  const userId = JSON.parse(localStorage.getItem('userId'));
+  var userId = JSON.parse(localStorage.getItem('userId'));
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`/api/auth/:${userId}/getuser/detail`)
-    .then((data) => {
-        console.log("user", data.data)
-        setUser(data.data)
-    })
-    .catch((err) => {
+    axios
+      .get(`/api/auth/${userId}/get/user`)
+      .then((data) => {
+        console.log("user", data.data);
+        setUser(data.data);
+      })
+      .catch((err) => {
         console.log(err);
-    })
-  },[])
+      });
+  }, [userId]);
 
   return (
     <>
