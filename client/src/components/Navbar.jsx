@@ -21,7 +21,8 @@ import { useEffect, useState } from 'react';
   const Navbar = () => {
 
   const { colorMode, toggleColorMode } = useColorMode();
-  const [user , setUser] = useState({})
+  const [user , setUser] = useState({});
+  const [logout, setLogout] = useState(false);
   var userId = JSON.parse(localStorage.getItem('userId'));
   const navigate = useNavigate();
 
@@ -37,6 +38,24 @@ import { useEffect, useState } from 'react';
       });
   }, [userId]);
 
+  useEffect(() => {
+    if(userId){
+      setLogout(true)
+    }
+    else{
+      setLogout(false);
+    }
+  },[userId]);
+
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    setLogout(false);
+    window.location.reload();
+    // navigate("/register");
+  }
+
+
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -50,6 +69,13 @@ import { useEffect, useState } from 'react';
                colorScheme='orange'
                >HISTORY
             </Button>
+            <Button   
+               onClick={() => navigate("/")} 
+               ml="10"
+               mt="1.5"
+               colorScheme='green'
+               >CALCULATE BMI
+            </Button>
           </Box>
 
           <Flex alignItems={'center'} mr="10">
@@ -58,8 +84,13 @@ import { useEffect, useState } from 'react';
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
 
-              <Button bg='teal' colorScheme="white" onClick={() => navigate("/login")} >LOGIN</Button>
-              <Button bg="teal" colorScheme="white" onClick={() => navigate("/register")} >REGISTER</Button>
+                {
+                logout ? <Button colorScheme="red" onClick={handleLogout} >LOGOUT</Button> :
+                  <>
+                      <Button bg='teal' colorScheme="white" onClick={() => navigate("/login")} >LOGIN</Button>
+                     <Button bg="teal" colorScheme="white" onClick={() => navigate("/register")} >REGISTER</Button>                 
+                  </>
+                } 
               <Menu>
               <MenuButton
                 as={Button}
